@@ -34,12 +34,12 @@ app.use(cors({
   credentials: true,
 }));
 
-// ── Body Parsing (with size limit to prevent DoS) ─────────────────────────
-app.use('/api/ai/image', express.json({ limit: '5mb' }));   // image route needs more headroom
-app.use('/api/chapters', express.json({ limit: '2mb' }));   // chapter content (rich HTML) can be large
-app.use('/api/stories', express.json({ limit: '2mb' }));    // story descriptions etc.
-app.use(express.json({ limit: '50kb' }));
-app.use(express.urlencoded({ extended: true, limit: '50kb' }));
+// ── Body Parsing ──────────────────────────────────────────────────────────
+// Use a single global parser with a generous limit.
+// Chapter content (rich HTML from Tiptap) can be large; having multiple parsers
+// causes the stream to be consumed twice, crashing with a 500.
+app.use(express.json({ limit: '2mb' }));
+app.use(express.urlencoded({ extended: true, limit: '2mb' }));
 
 // ── MongoDB Injection Prevention ──────────────────────────────────────────
 app.use((req, res, next) => {
