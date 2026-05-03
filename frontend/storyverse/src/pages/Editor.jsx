@@ -341,7 +341,7 @@ const Editor = () => {
   const [saving, setSaving] = useState(false);
   const [autoSaveStatus, setAutoSaveStatus] = useState(''); // 'saving', 'saved', ''
   const [uploading, setUploading] = useState(false);
-  const [showSidebar, setShowSidebar] = useState(true);
+  const [showSidebar, setShowSidebar] = useState(false);
   const [showChapterPanel, setShowChapterPanel] = useState(window.innerWidth >= 768);
   const [loadingExisting, setLoadingExisting] = useState(!!existingStoryId);
   const fileInputRef = useRef(null);
