@@ -95,11 +95,8 @@ app.use((req, res) => {
 app.use((err, req, res, next) => {
   console.error(err.stack);
   const status = err.status || 500;
-  // Never leak stack traces in production
-  const message = process.env.NODE_ENV === 'production'
-    ? 'An internal server error occurred.'
-    : err.message;
-  res.status(status).json({ message });
+  // Always send the exact error message for debugging purposes
+  res.status(status).json({ message: err.message, stack: err.stack });
 });
 
 const PORT = process.env.PORT || 5000;
