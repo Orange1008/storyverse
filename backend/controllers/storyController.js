@@ -50,15 +50,16 @@ const getStoryById = async (req, res) => {
 // @access  Private (any authenticated user)
 const createStory = async (req, res) => {
   try {
-    const { title, description, genre, coverImage, coverColor, tags } = req.body;
+    const { title, description, genre, coverImage, coverColor, tags, status } = req.body;
 
     const story = new Story({
       title,
-      description,
+      description: description || 'No description provided.',
       genre,
       coverImage: coverImage || '',
       coverColor: coverColor || '#7C3AED',
       tags: tags || [],
+      status: status || 'draft',
       authorId: req.user._id,
     });
 
@@ -83,7 +84,7 @@ const updateStory = async (req, res) => {
       return res.status(401).json({ message: 'Not authorized to update this story' });
     }
 
-    const { title, description, genre, coverImage, coverColor, tags, chapterCount } = req.body;
+    const { title, description, genre, coverImage, coverColor, tags, chapterCount, status } = req.body;
     if (title !== undefined) story.title = title;
     if (description !== undefined) story.description = description;
     if (genre !== undefined) story.genre = genre;
@@ -91,6 +92,7 @@ const updateStory = async (req, res) => {
     if (coverColor !== undefined) story.coverColor = coverColor;
     if (tags !== undefined) story.tags = tags;
     if (chapterCount !== undefined) story.chapterCount = chapterCount;
+    if (status !== undefined) story.status = status;
 
     const updatedStory = await story.save();
     res.json(updatedStory);
