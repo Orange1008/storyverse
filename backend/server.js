@@ -35,9 +35,11 @@ app.use(cors({
 }));
 
 // ── Body Parsing (with size limit to prevent DoS) ─────────────────────────
-app.use('/api/ai/image', express.json({ limit: '5mb' }));  // image route needs more headroom
-app.use(express.json({ limit: '10kb' }));
-app.use(express.urlencoded({ extended: true, limit: '10kb' }));
+app.use('/api/ai/image', express.json({ limit: '5mb' }));   // image route needs more headroom
+app.use('/api/chapters', express.json({ limit: '2mb' }));   // chapter content (rich HTML) can be large
+app.use('/api/stories', express.json({ limit: '2mb' }));    // story descriptions etc.
+app.use(express.json({ limit: '50kb' }));
+app.use(express.urlencoded({ extended: true, limit: '50kb' }));
 
 // ── MongoDB Injection Prevention ──────────────────────────────────────────
 app.use((req, res, next) => {
