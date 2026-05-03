@@ -8,6 +8,8 @@ const createChapter = async (req, res) => {
   try {
     const { storyId, title, content, order } = req.body;
 
+    console.log('[createChapter] body:', { storyId, title, order, contentLength: content?.length });
+
     const story = await Story.findById(storyId);
     if (!story) return res.status(404).json({ message: 'Story not found' });
     if (story.authorId.toString() !== req.user._id.toString()) {
@@ -21,7 +23,8 @@ const createChapter = async (req, res) => {
 
     res.status(201).json(chapter);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error('[createChapter] ERROR:', error.name, error.message, error.stack);
+    res.status(500).json({ message: `${error.name}: ${error.message}` });
   }
 };
 
