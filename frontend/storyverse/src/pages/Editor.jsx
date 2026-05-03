@@ -646,38 +646,27 @@ const Editor = () => {
           </div>
         </div>
 
-        {/* ===== RIGHT: SETTINGS (Desktop) ===== */}
+        {/* ===== RIGHT: SETTINGS (Universal Drawer) ===== */}
         {showSidebar && (
-          <div className={`hidden md:flex w-72 flex-shrink-0 border-l flex-col overflow-y-auto z-10 custom-scrollbar ${isDark ? 'border-gray-800 bg-[#0f0f0f]' : 'border-amber-100 bg-white'}`}>
-            <SettingsPanel
-              isDark={isDark} description={description} setDescription={setDescription}
-              genre={genre} setGenre={setGenre} tags={tags} setTags={setTags} tagInput={tagInput} setTagInput={setTagInput}
-              coverColor={coverColor} setCoverColor={setCoverColor} coverImage={coverImage} setCoverImage={setCoverImage}
-              title={title} uploading={uploading} fileInputRef={fileInputRef} handleCoverUpload={handleCoverUpload}
-              wordCount={activeWordCount}
-              status={status} setStatus={setStatus}
-            />
-          </div>
-        )}
-
-        {/* ===== RIGHT: SETTINGS (Mobile Drawer) ===== */}
-        {showSidebar && (
-          <div className="md:hidden fixed inset-0 z-50 flex justify-end">
-            <div className="flex-1 bg-black/60 backdrop-blur-sm" onClick={() => setShowSidebar(false)} />
-            <div className={`w-full max-w-sm h-full overflow-y-auto shadow-2xl safe-paddings ${isDark ? 'bg-[#0f0f0f]' : 'bg-white'}`}>
-              <div className={`flex flex-row-reverse items-center justify-between px-4 py-4 border-b ${isDark ? 'border-gray-800' : 'border-amber-100'}`}>
-                <button onClick={() => setShowSidebar(false)} className={`p-2 rounded-full ${isDark ? 'bg-slate-800 text-white' : 'bg-slate-100 text-slate-600'}`}>
+          <div className="fixed inset-0 z-50 flex justify-end">
+            <div className="flex-1 bg-black/60 backdrop-blur-sm transition-opacity" onClick={() => setShowSidebar(false)} />
+            <div className={`w-full max-w-sm h-full overflow-y-auto shadow-2xl safe-paddings flex flex-col ${isDark ? 'bg-[#0f0f0f]' : 'bg-white'}`}>
+              <div className={`flex items-center justify-between px-4 py-4 border-b flex-shrink-0 ${isDark ? 'border-gray-800' : 'border-amber-100'}`}>
+                <p className={`text-sm font-extrabold uppercase tracking-widest ${isDark ? 'text-purple-400' : 'text-purple-600'}`}>Story Settings</p>
+                <button onClick={() => setShowSidebar(false)} className={`p-2 rounded-full transition-colors ${isDark ? 'bg-slate-800 text-white hover:bg-slate-700' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}`}>
                   <X size={16} />
                 </button>
               </div>
-              <SettingsPanel
-                isDark={isDark} description={description} setDescription={setDescription}
-                genre={genre} setGenre={setGenre} tags={tags} setTags={setTags} tagInput={tagInput} setTagInput={setTagInput}
-                coverColor={coverColor} setCoverColor={setCoverColor} coverImage={coverImage} setCoverImage={setCoverImage}
-                title={title} uploading={uploading} fileInputRef={fileInputRef} handleCoverUpload={handleCoverUpload}
-                wordCount={activeWordCount}
-                status={status} setStatus={setStatus}
-              />
+              <div className="flex-1 overflow-y-auto custom-scrollbar">
+                <SettingsPanel
+                  isDark={isDark} description={description} setDescription={setDescription}
+                  genre={genre} setGenre={setGenre} tags={tags} setTags={setTags} tagInput={tagInput} setTagInput={setTagInput}
+                  coverColor={coverColor} setCoverColor={setCoverColor} coverImage={coverImage} setCoverImage={setCoverImage}
+                  title={title} uploading={uploading} fileInputRef={fileInputRef} handleCoverUpload={handleCoverUpload}
+                  wordCount={activeWordCount}
+                  status={status} setStatus={setStatus}
+                />
+              </div>
             </div>
           </div>
         )}
