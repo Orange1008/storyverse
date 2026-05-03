@@ -31,12 +31,12 @@ const chapterSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// Auto-compute wordCount before saving
-chapterSchema.pre('save', function (next) {
+// Auto-compute wordCount before saving (Mongoose 9 async style — no `next` param)
+chapterSchema.pre('save', async function () {
   if (this.content) {
     this.wordCount = this.content.replace(/<[^>]*>/g, ' ').split(/\s+/).filter(Boolean).length;
   }
-  next();
 });
+
 
 module.exports = mongoose.model('Chapter', chapterSchema);
