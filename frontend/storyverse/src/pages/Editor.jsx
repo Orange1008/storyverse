@@ -648,7 +648,7 @@ const Editor = () => {
 
         {/* ===== RIGHT: SETTINGS (Desktop) ===== */}
         {showSidebar && (
-          <div className={`hidden lg:flex w-72 flex-shrink-0 border-l flex-col overflow-y-auto z-10 custom-scrollbar ${isDark ? 'border-gray-800 bg-[#0f0f0f]' : 'border-amber-100 bg-white'}`}>
+          <div className={`hidden md:flex w-72 flex-shrink-0 border-l flex-col overflow-y-auto z-10 custom-scrollbar ${isDark ? 'border-gray-800 bg-[#0f0f0f]' : 'border-amber-100 bg-white'}`}>
             <SettingsPanel
               isDark={isDark} description={description} setDescription={setDescription}
               genre={genre} setGenre={setGenre} tags={tags} setTags={setTags} tagInput={tagInput} setTagInput={setTagInput}
@@ -662,7 +662,7 @@ const Editor = () => {
 
         {/* ===== RIGHT: SETTINGS (Mobile Drawer) ===== */}
         {showSidebar && (
-          <div className="lg:hidden fixed inset-0 z-50 flex justify-end">
+          <div className="md:hidden fixed inset-0 z-50 flex justify-end">
             <div className="flex-1 bg-black/60 backdrop-blur-sm" onClick={() => setShowSidebar(false)} />
             <div className={`w-full max-w-sm h-full overflow-y-auto shadow-2xl safe-paddings ${isDark ? 'bg-[#0f0f0f]' : 'bg-white'}`}>
               <div className={`flex flex-row-reverse items-center justify-between px-4 py-4 border-b ${isDark ? 'border-gray-800' : 'border-amber-100'}`}>
